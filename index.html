@@ -27,14 +27,20 @@
       object-fit: cover;
       z-index: -2;
     }
+    /* Stronger overlay for readability */
     .overlay {
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.55) 0%,
+        rgba(0,0,0,0.62) 35%,
+        rgba(0,0,0,0.75) 100%
+      );
       z-index: -1;
     }
-    header { text-align: center; margin-bottom: 40px; animation: fadeIn 1s ease-in; }
+    header { text-align: center; margin-bottom: 32px; animation: fadeIn 1s ease-in; }
     header img {
       width: 140px; height: 140px; border-radius: 50%;
       border: 3px solid #ffd700; /* gold ring */
@@ -44,18 +50,51 @@
     }
     header img:hover { transform: scale(1.05); }
     header h1 {
-      font-size: 3rem; font-weight: 700;
+      font-size: clamp(2rem, 4.2vw, 3.25rem);
+      font-weight: 700;
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,.6));
+      margin-bottom: 6px;
+      color: #ffd86b;
       text-shadow: 0 0 10px rgba(255, 204, 0, 0.6), 0 0 20px rgba(255, 105, 180, 0.5);
       animation: glowPulse 3s ease-in-out infinite;
     }
     @keyframes glowPulse {
-      0%, 100% { color:#fff; text-shadow: 0 0 10px rgba(255,215,0,0.6), 0 0 20px rgba(255,105,180,0.5); }
+      0%, 100% { color:#ffd86b; text-shadow: 0 0 10px rgba(255,215,0,0.6), 0 0 20px rgba(255,105,180,0.5); }
       50% { color:#ffd700; text-shadow: 0 0 16px rgba(255,105,180,0.9), 0 0 36px rgba(255,215,0,0.8); }
     }
-    header p.role { font-style: italic; color: #ffd700; font-size: 1.3rem; margin-top: 5px; }
-    header h3 { margin-top: 10px; font-weight: 400; }
-    header .intro { max-width: 900px; margin: 20px auto 0; color: #ddd; font-size: 1rem; }
-    .button-group { text-align: center; margin-bottom: 30px; }
+    header p.role {
+      font-style: italic;
+      color: #ffd86b;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      margin-bottom: 10px;
+      text-shadow: 0 2px 8px rgba(0,0,0,.55);
+    }
+    header h3 {
+      color: #f0f0f0;
+      font-weight: 500;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 10px rgba(0,0,0,.55);
+      font-size: clamp(1rem, 2.2vw, 1.25rem);
+    }
+    /* Glass card to improve paragraph readability */
+    .hero-copy{
+      max-width: 980px;
+      margin: 18px auto 0;
+      padding: 22px 28px;
+      background: rgba(10, 10, 10, 0.45);
+      border: 1px solid rgba(255, 215, 0, 0.35);
+      border-radius: 16px;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+    }
+    header .intro {
+      color:#e9e9e9;
+      line-height: 1.75;
+      font-size: clamp(0.98rem, 1.2vw, 1.05rem);
+      text-shadow: none;
+    }
+    .button-group { text-align: center; margin: 24px 0 10px; }
     .button-group a {
       display: inline-block; padding: 10px 20px; margin: 0 10px;
       background: linear-gradient(135deg,#ffd700,#ff69b4);
@@ -65,7 +104,12 @@
     }
     .button-group a:hover { transform: translateY(-2px); filter: brightness(1.05); }
 
-    h2 { border-bottom: 2px solid #ffd700; padding-bottom: 5px; margin-top: 50px; font-size: 1.8rem; }
+    h2 {
+      border-bottom: 2px solid #ffd700;
+      padding-bottom: 5px;
+      margin-top: 40px;
+      font-size: 1.8rem;
+    }
 
     /* Skills section: pink + gold light-up bubbles */
     .skills-bubble-container {
@@ -83,7 +127,6 @@
     }
     .skill-bubble:nth-child(2n){ animation-duration: 4.2s, 5s; }
     .skill-bubble:nth-child(3n){ animation-duration: 5s, 6s; }
-
     @keyframes skillGlow {
       0%,100% { border-color:#ff69b4; box-shadow: 0 0 10px rgba(255,105,180,0.5), 0 0 18px rgba(255,215,0,0.25) inset; }
       50% { border-color:#ffd700; box-shadow: 0 0 12px rgba(255,215,0,0.8), 0 0 26px rgba(255,105,180,0.35) inset; }
@@ -99,6 +142,7 @@
     /* Animations & mobile */
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     @keyframes floatSkill { 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-6px);} }
+
     @media (max-width: 768px) {
       header h1 { font-size: 2rem; }
       header p.role { font-size: 1rem; }
@@ -106,37 +150,42 @@
       .skill-bubble { font-size: 0.85rem; padding: 8px 12px; }
       .button-group { display:flex; flex-direction:column; align-items:center; gap:12px; }
       .button-group a { width: 80%; text-align:center; }
+      .hero-copy { padding: 18px; }
     }
   </style>
 </head>
 <body>
-  <!-- Updated video title -->
+  <!-- Background video -->
   <video id="bgVideo" class="video-bg" autoplay muted playsinline>
-    <source src="Houston_skyline.mp4" type="video/mp4" />
+    <source src="/Tasha-Resume-Website/Houston_skyline.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
   <div class="overlay"></div>
 
   <div class="container">
     <header>
-      <!-- Updated profile picture + LinkedIn link -->
+      <!-- Profile picture + LinkedIn -->
       <a href="https://www.linkedin.com/in/tasha-h-278b12b4/details/skills/" target="_blank" rel="noopener">
-        <img src="./Tasha_Profile_Picture.jpg?v=1" alt="Tasha R. Hubbard" />
+        <img src="/Tasha-Resume-Website/Tasha_Profile_Picture.jpg?v=3" alt="Tasha R. Hubbard">
       </a>
-      <h1>Tasha R. Hubbard</h1>
-      <p class="role">Lead Paralegal & Contract Administration</p>
-      <h3>Business Administration – Associate of Science (In-progress)</h3>
-      <p class="intro">
-        Lead Paralegal and Contract Administrator with deep experience across corporate legal support, entity formation,
-        UCC filings, reinsurance documentation, audits, and accounting workflows. Trusted partner to outside counsel and
-        executive leadership—drafting and maintaining compliant legal instruments, coordinating complex documentation
-        for asset-backed loans and reinsurance programs, and streamlining records, e-filing, and discovery processes for
-        highly regulated environments. Proven reliability, attention to detail, and client-service mindset.
-      </p>
+
+      <!-- Glass card wraps headline + copy -->
+      <div class="hero-copy">
+        <h1>Tasha R. Hubbard</h1>
+        <p class="role">Lead Paralegal & Contract Administration</p>
+        <h3>Business Administration – Associate of Science (In-progress)</h3>
+        <p class="intro">
+          Lead Paralegal and Contract Administrator with deep experience across corporate legal support, entity formation,
+          UCC filings, reinsurance documentation, audits, and accounting workflows. Trusted partner to outside counsel and
+          executive leadership—drafting and maintaining compliant legal instruments, coordinating complex documentation
+          for asset-backed loans and reinsurance programs, and streamlining records, e-filing, and discovery processes for
+          highly regulated environments. Proven reliability, attention to detail, and client-service mindset.
+        </p>
+      </div>
     </header>
 
     <div class="button-group">
-      <a href="Tasha_Hubbard_Resume.pdf" download>Download Resume</a>
+      <a href="/Tasha-Resume-Website/Tasha_Hubbard_Resume.pdf" download>Download Resume</a>
       <a href="https://www.linkedin.com/in/tasha-h-278b12b4/details/skills/" target="_blank" rel="noopener">LinkedIn</a>
     </div>
 
@@ -144,7 +193,7 @@
 
     <h2>Skills</h2>
     <div class="skills-bubble-container" id="skillsContainer">
-      <!-- Curated from the screenshot & resume to avoid duplicates -->
+      <!-- Curated skills -->
       <span class="skill-bubble">Attention to Detail</span>
       <span class="skill-bubble">Entity Formations</span>
       <span class="skill-bubble">Electronic Filing (E-Filing)</span>
@@ -178,23 +227,23 @@
     </div>
   </div>
 
-<script>
-  // Pause video on last frame
-  const video = document.getElementById("bgVideo");
-  video.addEventListener("timeupdate", () => {
-    if (video.duration && (video.duration - video.currentTime <= 0.1)) {
-      video.pause();
-    }
-  });
+  <script>
+    // Pause video on last frame
+    const video = document.getElementById("bgVideo");
+    video.addEventListener("timeupdate", () => {
+      if (video.duration && (video.duration - video.currentTime <= 0.1)) {
+        video.pause();
+      }
+    });
 
-  // Shuffle skills on load for a fresh look each visit
-  const skillsContainer = document.getElementById("skillsContainer");
-  const skills = Array.from(skillsContainer.children);
-  for (let i = skills.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [skills[i], skills[j]] = [skills[j], skills[i]];
-  }
-  skills.forEach(skill => skillsContainer.appendChild(skill));
-</script>
+    // Shuffle skills on load for a fresh look each visit
+    const skillsContainer = document.getElementById("skillsContainer");
+    const skills = Array.from(skillsContainer.children);
+    for (let i = skills.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [skills[i], skills[j]] = [skills[j], skills[i]];
+    }
+    skills.forEach(skill => skillsContainer.appendChild(skill));
+  </script>
 </body>
 </html>
