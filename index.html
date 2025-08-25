@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tasha R. Hubbard – Lead Paralegal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #0b0c10;
+      color: #f5f5f5;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    .container {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .video-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: -1;
+    }
+    header { text-align: center; margin-bottom: 40px; animation: fadeIn 1s ease-in; }
+    header img {
+      width: 140px; height: 140px; border-radius: 50%;
+      border: 3px solid #ffd700; /* gold ring */
+      cursor: pointer; transition: transform 0.3s ease;
+      object-fit: cover;
+      box-shadow: 0 0 12px rgba(255,215,0,0.4);
+    }
+    header img:hover { transform: scale(1.05); }
+    header h1 {
+      font-size: 3rem; font-weight: 700;
+      text-shadow: 0 0 10px rgba(255, 204, 0, 0.6), 0 0 20px rgba(255, 105, 180, 0.5);
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+    @keyframes glowPulse {
+      0%, 100% { color:#fff; text-shadow: 0 0 10px rgba(255,215,0,0.6), 0 0 20px rgba(255,105,180,0.5); }
+      50% { color:#ffd700; text-shadow: 0 0 16px rgba(255,105,180,0.9), 0 0 36px rgba(255,215,0,0.8); }
+    }
+    header p.role { font-style: italic; color: #ffd700; font-size: 1.3rem; margin-top: 5px; }
+    header h3 { margin-top: 10px; font-weight: 400; }
+    header .intro { max-width: 900px; margin: 20px auto 0; color: #ddd; font-size: 1rem; }
+    .button-group { text-align: center; margin-bottom: 30px; }
+    .button-group a {
+      display: inline-block; padding: 10px 20px; margin: 0 10px;
+      background: linear-gradient(135deg,#ffd700,#ff69b4);
+      color: #000; text-decoration: none; font-weight: bold;
+      border-radius: 6px; transition: transform .2s ease, filter .2s ease;
+      box-shadow: 0 0 12px rgba(255,105,180,0.35);
+    }
+    .button-group a:hover { transform: translateY(-2px); filter: brightness(1.05); }
+
+    h2 { border-bottom: 2px solid #ffd700; padding-bottom: 5px; margin-top: 50px; font-size: 1.8rem; }
+
+    /* Skills section: pink + gold light-up bubbles */
+    .skills-bubble-container {
+      display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 20px;
+    }
+    .skill-bubble {
+      display: inline-block; padding: 12px 18px; border-radius: 50px;
+      border: 2px solid #ff69b4; /* pink border */
+      background: rgba(255,105,180,0.08); /* soft pink */
+      color: #fff; font-size: 0.95rem; font-weight: 500;
+      white-space: nowrap;
+      animation: skillGlow 3.6s ease-in-out infinite, floatSkill 4s ease-in-out infinite;
+      transition: transform 0.25s, background 0.25s, box-shadow 0.25s, border-color 0.25s;
+      box-shadow: 0 0 10px rgba(255,105,180,0.35), 0 0 20px rgba(255,215,0,0.25) inset;
+    }
+    .skill-bubble:nth-child(2n){ animation-duration: 4.2s, 5s; }
+    .skill-bubble:nth-child(3n){ animation-duration: 5s, 6s; }
+
+    @keyframes skillGlow {
+      0%,100% { border-color:#ff69b4; box-shadow: 0 0 10px rgba(255,105,180,0.5), 0 0 18px rgba(255,215,0,0.25) inset; }
+      50% { border-color:#ffd700; box-shadow: 0 0 12px rgba(255,215,0,0.8), 0 0 26px rgba(255,105,180,0.35) inset; }
+    }
+    .skill-bubble:hover {
+      transform: scale(1.15);
+      background: radial-gradient(ellipse at center, rgba(255,215,0,0.95), rgba(255,105,180,0.85));
+      color: #000;
+      border-color:#ffd700;
+      box-shadow: 0 0 16px rgba(255,215,0,0.9), 0 0 26px rgba(255,105,180,0.6);
+    }
+
+    /* Animations & mobile */
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes floatSkill { 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-6px);} }
+    @media (max-width: 768px) {
+      header h1 { font-size: 2rem; }
+      header p.role { font-size: 1rem; }
+      .skills-bubble-container { gap: 10px; }
+      .skill-bubble { font-size: 0.85rem; padding: 8px 12px; }
+      .button-group { display:flex; flex-direction:column; align-items:center; gap:12px; }
+      .button-group a { width: 80%; text-align:center; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Updated video title -->
+  <video id="bgVideo" class="video-bg" autoplay muted playsinline>
+    <source src="Houston_skyline.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+  <div class="overlay"></div>
+
+  <div class="container">
+    <header>
+      <!-- Updated profile picture + LinkedIn link -->
+      <a href="https://www.linkedin.com/in/tasha-h-278b12b4/details/skills/" target="_blank" rel="noopener">
+        <img src="Tasha_Profile_Picture" alt="Tasha R. Hubbard">
+      </a>
+      <h1>Tasha R. Hubbard</h1>
+      <p class="role">Lead Paralegal & Contract Administration</p>
+      <h3>Business Administration – Associate of Science (in progress)</h3>
+      <p class="intro">
+        Lead Paralegal and Contract Administrator with deep experience across corporate legal support, entity formation,
+        UCC filings, reinsurance documentation, audits, and accounting workflows. Trusted partner to outside counsel and
+        executive leadership—drafting and maintaining compliant legal instruments, coordinating complex documentation
+        for asset-backed loans and reinsurance programs, and streamlining records, e-filing, and discovery processes for
+        highly regulated environments. Proven reliability, attention to detail, and client-service mindset. :contentReference[oaicite:0]{index=0}
+      </p>
+    </header>
+
+    <div class="button-group">
+      <a href="Tasha_Hubbard_Resume.pdf" download>Download Resume</a>
+      <a href="https://www.linkedin.com/in/tasha-h-278b12b4/details/skills/" target="_blank" rel="noopener">LinkedIn Skills</a>
+    </div>
+
+    <!-- Projects section removed as requested -->
+
+    <h2>Skills</h2>
+    <div class="skills-bubble-container" id="skillsContainer">
+      <!-- Curated from the screenshot & resume to avoid duplicates -->
+      <span class="skill-bubble">Attention to Detail</span>
+      <span class="skill-bubble">Entity Formations</span>
+      <span class="skill-bubble">Electronic Filing (E-Filing)</span>
+      <span class="skill-bubble">Communication</span>
+      <span class="skill-bubble">Analytical Skills</span>
+      <span class="skill-bubble">Accounting</span>
+      <span class="skill-bubble">Microsoft Word</span>
+      <span class="skill-bubble">Microsoft Excel</span>
+      <span class="skill-bubble">Microsoft Office</span>
+      <span class="skill-bubble">Customer Service</span>
+      <span class="skill-bubble">Teamwork</span>
+      <span class="skill-bubble">Time Management</span>
+      <span class="skill-bubble">PowerPoint</span>
+      <span class="skill-bubble">Accounts Payable</span>
+      <span class="skill-bubble">Outlook</span>
+      <span class="skill-bubble">Financial Planning</span>
+      <span class="skill-bubble">Internal Controls</span>
+      <span class="skill-bubble">Risk Management</span>
+      <span class="skill-bubble">Financial Analysis</span>
+      <span class="skill-bubble">Financial Accounting</span>
+      <span class="skill-bubble">Financial Reporting</span>
+      <span class="skill-bubble">Strategic Planning</span>
+      <span class="skill-bubble">Texas Notary</span>
+      <span class="skill-bubble">WordPerfect</span>
+      <span class="skill-bubble">QuickBooks / Sage / Peachtree</span>
+      <span class="skill-bubble">LexisNexis &amp; Westlaw</span>
+      <span class="skill-bubble">UCC Filings</span>
+      <span class="skill-bubble">Contracts (Reinsurance)</span>
+      <span class="skill-bubble">Records Management</span>
+      <span class="skill-bubble">Audit Support</span>
+    </div>
+  </div>
+
+<script>
+  // Pause video on last frame
+  const video = document.getElementById("bgVideo");
+  video.addEventListener("timeupdate", () => {
+    if (video.duration && (video.duration - video.currentTime <= 0.1)) {
+      video.pause();
+    }
+  });
+
+  // Shuffle skills on load for a fresh look each visit
+  const skillsContainer = document.getElementById("skillsContainer");
+  const skills = Array.from(skillsContainer.children);
+  for (let i = skills.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [skills[i], skills[j]] = [skills[j], skills[i]];
+  }
+  skills.forEach(skill => skillsContainer.appendChild(skill));
+</script>
+</body>
+</html>
